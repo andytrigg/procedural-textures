@@ -24,6 +24,8 @@ namespace NoiseProcedures
         [TestCase(6.0F, ExpectedResult = 0.595048487f)]
         [TestCase(7.0F, ExpectedResult = 0.102574237f)]
         [TestCase(8.0F, ExpectedResult = 0.897243202f)]        
+        [TestCase(9.0F, ExpectedResult = 0.834620535f)]        
+        [TestCase(10.0F, ExpectedResult = 0.55625391f)]        
         public float ValueNoiseShouldEvaluateForEachCalculatedPoint(float x)
         {           
             return valueNoise1D.Evaluate(x);
@@ -36,5 +38,12 @@ namespace NoiseProcedures
             Assert.AreEqual(expectedValue, valueNoise1D.Evaluate(x));
         }
  
+        [Test]
+        public void ValueNoiseShouldJoinSeamlessley()
+        {
+            float startNoise = valueNoise1D.Evaluate(0.0f);
+            float endNoise = valueNoise1D.Evaluate(10.0f);
+            Assert.AreEqual(startNoise, endNoise);
+        }
     }
 }

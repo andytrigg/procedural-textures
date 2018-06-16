@@ -41,11 +41,12 @@ namespace NoiseProcedures
         /// <returns>Returns a noise value between 0.0f and 1.0f given a positon of x.</returns>
         public float Evaluate(float x)
         {
-            int xMin = (int)x;
-            Debug.Assert(xMin <= MAX_VERTICES - 1);
+            int xAsInteger = (int)x;
+            int minimumX = xAsInteger % MAX_VERTICES;
 
-            float t = x - xMin;
-            return Interpolation.Linear(values[xMin], values[xMin +1], t);
+            float t = x - xAsInteger;
+            int maximumX = (minimumX == MAX_VERTICES - 1) ? 0 : minimumX + 1;
+            return Interpolation.Linear(values[minimumX], values[maximumX], t);
         }
     }
 }
