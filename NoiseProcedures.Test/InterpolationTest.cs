@@ -1,9 +1,9 @@
 using NoiseProcedures;
 using NUnit.Framework;
 
-namespace Tests
+namespace NoiseProcedures
 {
-    public class NoiseProcedures
+    public class InterpolationTest
     {
         [Test]
         public void LinearInterpolationShouldReturnTheLowValueWhenAplhpaIsZero()
