@@ -5,6 +5,13 @@ namespace NoiseProcedures
 {
     public class Interpolation
     {
+        /// <summary>
+        /// Simple Linear interpolation function(lert).
+        /// </summary>
+        /// <param name="low">The lowest value of the two points</param>
+        /// <param name="high">The high value of the two points</param>
+        /// <param name="alpha">The fraction between the points whose value will be interoplated based on a linear function. This value should be between 0.0 and 1.0</param>
+        /// <returns>The linearly interpolated value.</returns>
         public static float Linear(float low, float high, float alpha) => (1 - alpha) * low + alpha * high;
     }
 
@@ -26,6 +33,12 @@ namespace NoiseProcedures
             }
         }
             
+        /// <summary>
+        /// Evaluates the noise function at position x. The noise values between the calculated points are 
+        /// linearly interpolated so the noise appears smooth rather than random.
+        /// </summary>
+        /// <param name="x">The position whise noise value will be calculated</param>
+        /// <returns>Returns a noise value between 0.0f and 1.0f given a positon of x.</returns>
         public float Evaluate(float x)
         {
             int xMin = (int)x;
