@@ -3,3 +3,7 @@
 ################################################################################
 
 /NoiseProcedures/bin/Debug/netstandard2.0
+/NoiseProcedures/obj
+/.vs/procedural-textures
+/NoiseProcedures.Test/bin/Debug/netcoreapp2.0
+/NoiseProcedures.Test/obj

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "procedural-textures", "procedural-textures\procedural-textures.csproj", "{833C7F9E-C8C1-4C6F-B91E-0F2985F87163}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseProcedures", "NoiseProcedures\NoiseProcedures.csproj", "{7C7C311D-26BC-4279-9AF3-E29F4AF447E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoiseProcedures.Test", "NoiseProcedures.Test\NoiseProcedures.Test.csproj", "{FCBE3DB8-17DF-464C-8F12-9B802BABDBBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{833C7F9E-C8C1-4C6F-B91E-0F2985F87163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{833C7F9E-C8C1-4C6F-B91E-0F2985F87163}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{833C7F9E-C8C1-4C6F-B91E-0F2985F87163}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{833C7F9E-C8C1-4C6F-B91E-0F2985F87163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C7C311D-26BC-4279-9AF3-E29F4AF447E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7C311D-26BC-4279-9AF3-E29F4AF447E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7C311D-26BC-4279-9AF3-E29F4AF447E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7C311D-26BC-4279-9AF3-E29F4AF447E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBE3DB8-17DF-464C-8F12-9B802BABDBBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBE3DB8-17DF-464C-8F12-9B802BABDBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBE3DB8-17DF-464C-8F12-9B802BABDBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBE3DB8-17DF-464C-8F12-9B802BABDBBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
