@@ -43,7 +43,8 @@ namespace NoiseProcedures
 
     public class ValueNoise1D
     {           
-        private const int MAX_VERTICES = 10;
+        private const int MAX_VERTICES = 256;
+        private const int MAX_VERTICES_MASK = MAX_VERTICES - 1;
         private readonly InterpolationFunction interpolationFunction;
         private float[] values = new float[MAX_VERTICES];
 
@@ -70,11 +71,13 @@ namespace NoiseProcedures
         /// <returns>Returns a noise value between 0.0f and 1.0f given a positon of x.</returns>
         public float Evaluate(float x)
         {
-            int xAsInteger = (int)x;
-            int minimumX = xAsInteger % MAX_VERTICES;
-
+            // Floor
+            int xAsInteger = (x < 0 && x != (int)x) ? (int)x - 1 : (int)x;
             float t = x - xAsInteger;
-            int maximumX = (minimumX == MAX_VERTICES - 1) ? 0 : minimumX + 1;
+
+            // Modulo using &
+            int minimumX = xAsInteger & MAX_VERTICES_MASK;
+            int maximumX = (minimumX + 1) & MAX_VERTICES_MASK;
             return interpolationFunction(values[minimumX], values[maximumX], t);
         }
     }
