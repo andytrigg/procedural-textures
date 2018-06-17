@@ -5,6 +5,9 @@ namespace NoiseProcedures
 {
     public class Interpolation
     {
+        private static float CosineAlpha(float alpha) => (float)((1 - Math.Cos(alpha * Math.PI)) * 0.5);
+        private static float SmoothStepAlpha(float alpha) => alpha * alpha * (3 - 2 * alpha);
+
         /// <summary>
         /// Simple Linear interpolation function(lert).
         /// </summary>
@@ -22,14 +25,18 @@ namespace NoiseProcedures
         /// <param name="low">The lowest value of the two points</param>
         /// <param name="high">The high value of the two points</param>
         /// <param name="alpha">The fraction between the points whose value will be interoplated based on a linear function. This value should be between 0.0 and 1.0</param>
-        /// <returns></returns>
-        public static float CosineRemap(float low, float high, float alpha)
-        {
-            Debug.Assert(alpha >= 0.0f && alpha <= 1.0f);
-           
-            double alphaRemapCosine = (1 - Math.Cos(alpha * Math.PI)) * 0.5;
-            return Linear(low, high, (float) alphaRemapCosine);
-        }
+        /// <returns>The cosine mapped noise value at the alpha point</returns>
+        public static float CosineRemap(float low, float high, float alpha) => Linear(low, high, CosineAlpha(alpha));
+
+        /// <summary>
+        /// Apply a smooth step function to a linear interpolation
+        /// This well ensure that the nise function is curved and smoother than the cosine equivalent.
+        /// </summary>
+        /// <param name="low">The lowest value of the two points</param>
+        /// <param name="high">The high value of the two points</param>
+        /// <param name="alpha">The fraction between the points whose value will be interoplated based on a linear function. This value should be between 0.0 and 1.0</param>
+        /// <returns>The smooth step mapped noise value at the alpha point</returns>
+        public static float SmoothStepRemap(float low, float high, float alpha) => Linear(low, high, SmoothStepAlpha(alpha));
     }
 
     public class ValueNoise1D
