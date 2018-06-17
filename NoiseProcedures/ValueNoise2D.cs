@@ -58,5 +58,6 @@ namespace NoiseProcedures
             // linearly interpolate the nx0/nx1 along they y axis
             return Interpolation.Linear(nx0, nx1, sy);            
         }
+       
     }
 }
