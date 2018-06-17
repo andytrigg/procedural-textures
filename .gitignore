@@ -7,3 +7,4 @@
 /.vs/procedural-textures
 /NoiseProcedures.Test/bin/Debug/netcoreapp2.0
 /NoiseProcedures.Test/obj
+/.vs
