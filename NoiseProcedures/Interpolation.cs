@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace NoiseProcedures
 {
     public class Interpolation
-    {
+    {        
         private static float CosineAlpha(float alpha) => (float)((1 - Math.Cos(alpha * Math.PI)) * 0.5);
         private static float SmoothStepAlpha(float alpha) => alpha * alpha * (3 - 2 * alpha);
 
@@ -39,22 +39,27 @@ namespace NoiseProcedures
         public static float SmoothStepRemap(float low, float high, float alpha) => Linear(low, high, SmoothStepAlpha(alpha));
     }
 
+    public delegate float InterpolationFunction(float low, float high, float alpha);
+
     public class ValueNoise1D
-    {
+    {           
         private const int MAX_VERTICES = 10;
+        private readonly InterpolationFunction interpolationFunction;
         private float[] values = new float[MAX_VERTICES];
 
-        public ValueNoise1D() : this(4251)
+        public ValueNoise1D() : this(4251, Interpolation.Linear)
         {
         }
 
-        public ValueNoise1D(int seed )
+        public ValueNoise1D(int seed, InterpolationFunction interpolationFunction)
         {
             Random random = new Random(seed);
             for (int i = 0; i < MAX_VERTICES; i++)
             {
                 values[i] = (float)random.NextDouble();
             }
+
+            this.interpolationFunction = interpolationFunction;
         }
             
         /// <summary>
@@ -70,7 +75,7 @@ namespace NoiseProcedures
 
             float t = x - xAsInteger;
             int maximumX = (minimumX == MAX_VERTICES - 1) ? 0 : minimumX + 1;
-            return Interpolation.Linear(values[minimumX], values[maximumX], t);
+            return interpolationFunction(values[minimumX], values[maximumX], t);
         }
     }
 }
