@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoiseProcedures", "NoisePro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoiseProcedures.Test", "NoiseProcedures.Test\NoiseProcedures.Test.csproj", "{FCBE3DB8-17DF-464C-8F12-9B802BABDBBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "ConsoleApp1\TestHarness.csproj", "{118B640B-8BE4-464D-BA9C-C51119DE0B69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness\TestHarness.csproj", "{118B640B-8BE4-464D-BA9C-C51119DE0B69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
