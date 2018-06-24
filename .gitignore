@@ -10,3 +10,5 @@
 /.vs
 /ConsoleApp1/bin/Debug/netcoreapp2.0
 /ConsoleApp1/obj
+/TestHarness/bin/Debug/netcoreapp2.0
+/TestHarness/obj
