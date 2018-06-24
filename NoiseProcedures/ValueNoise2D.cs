@@ -2,7 +2,40 @@
 
 namespace NoiseProcedures
 {
-    public class ValueNoise2D
+    public delegate float ValueNoiseFunction(Vector2D point);
+
+    public interface IValueNoise2d
+    {
+        float Evaluate(Vector2D point);
+    }
+
+    public class FrequencyDecorator: IValueNoise2d
+    {
+        private readonly IValueNoise2d valueNoise;
+        private readonly float frequency;
+        public FrequencyDecorator(IValueNoise2d valueNoise, float frequency = 1.0f)
+        {
+            this.valueNoise = valueNoise;
+            this.frequency = frequency;
+        }
+
+        public float Evaluate(Vector2D point) => valueNoise.Evaluate(point * frequency);
+    }
+    
+    public class AmplitudeDecorator: IValueNoise2d
+    {
+        private readonly IValueNoise2d valueNoise;
+        private readonly float amplitude;
+        public AmplitudeDecorator(IValueNoise2d valueNoise, float amplitude = 1.0f)
+        {
+            this.valueNoise = valueNoise;
+            this.amplitude = amplitude;
+        }
+
+        public float Evaluate(Vector2D point) => (valueNoise.Evaluate(point) * amplitude);
+    }
+
+    public class ValueNoise2D: IValueNoise2d
     {
         private const int MAX_TABLE_SIZE = 256;
         private const int MAX_TABLE_SIZE_MASK = MAX_TABLE_SIZE - 1;        

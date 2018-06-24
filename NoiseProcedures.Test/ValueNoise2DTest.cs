@@ -1,10 +1,78 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Moq;
+using NUnit.Framework;
 
 namespace NoiseProcedures
 {
+    class FrequencyDecoratorTest
+    {
+        [Test]
+        public void FrequencyDecoratorShouldImplementTheValueNoiseInterface()
+        {
+            var innerMock = new Mock<IValueNoise2d>();
+
+            FrequencyDecorator frequencyDecorator = new FrequencyDecorator(innerMock.Object);
+            Assert.IsInstanceOf<IValueNoise2d>(frequencyDecorator);
+        }
+
+        [Test]
+        public void FrequencyDecoratorShouldApplyADefaultFrequencyThatHasNoImpact()
+        {
+            const int InnerNoiseValue = 3;
+
+            var innerMock = new Mock<IValueNoise2d>();
+            innerMock.Setup(inner => inner.Evaluate(new Vector2D(3.0f, 3.0f))).Returns(InnerNoiseValue);
+
+            FrequencyDecorator frequencyDecorator = new FrequencyDecorator(innerMock.Object);
+            Assert.AreEqual(InnerNoiseValue, frequencyDecorator.Evaluate(new Vector2D(3.0f, 3.0f)));
+        }
+
+        [Test]
+        public void FrequencyDecoratorShouldApplyACustomFrequencyOnTheVectorBeforeTheNoiseBeingEvaluated()
+        {
+            const int InnerNoiseValue = 3;
+
+            var innerMock = new Mock<IValueNoise2d>();
+            innerMock.Setup(inner => inner.Evaluate(new Vector2D(1.5f, 1.5f))).Returns(InnerNoiseValue);
+
+            FrequencyDecorator frequencyDecorator = new FrequencyDecorator(innerMock.Object, 0.5f);
+            Assert.AreEqual(InnerNoiseValue, frequencyDecorator.Evaluate(new Vector2D(3.0f, 3.0f)));
+        }
+    }
+
+    class AmplitudeDecoratorTest
+    {
+        [Test]
+        public void AmplitudeDecoratorShouldImplementTheValueNoiseInterface()
+        {
+            var innerMock = new Mock<IValueNoise2d>();
+
+            AmplitudeDecorator amplitudeDecorator = new AmplitudeDecorator(innerMock.Object);
+            Assert.IsInstanceOf<IValueNoise2d>(amplitudeDecorator);
+        }
+
+        [Test]
+        public void AmplitudeDecoratorShouldApplyADefaultAmplitudeThatHasNoImpact()
+        {
+            const int InnerNoiseValue = 3;
+
+            var innerMock = new Mock<IValueNoise2d>();
+            innerMock.Setup(inner => inner.Evaluate(new Vector2D(3.0f, 3.0f))).Returns(InnerNoiseValue);
+
+            AmplitudeDecorator amplitudeDecorator = new AmplitudeDecorator(innerMock.Object);
+            Assert.AreEqual(InnerNoiseValue, amplitudeDecorator.Evaluate(new Vector2D(3.0f, 3.0f)));
+        }
+
+        [Test]
+        public void AmplitudeDecoratorShouldApplyACustomAmplitudeOnTheResultOfTheNoiseBeingEvaluated()
+        {
+            var innerMock = new Mock<IValueNoise2d>();
+            innerMock.Setup(inner => inner.Evaluate(new Vector2D(3.0f, 3.0f))).Returns(3.0f);
+
+            AmplitudeDecorator amplitudeDecorator = new AmplitudeDecorator(innerMock.Object, 0.5f);
+            Assert.AreEqual(1.5f, amplitudeDecorator.Evaluate(new Vector2D(3.0f, 3.0f)));
+        }
+    }
+
     class ValueNoise2DTest
     {
         private ValueNoise2D valueNoise2D;
@@ -13,6 +81,12 @@ namespace NoiseProcedures
         protected void SetUp()
         {
             valueNoise2D = new ValueNoise2D();
+        }
+
+        [Test]
+        public void ValueNoise2dShouldImplementTheValueNoiseInterface()
+        {
+            Assert.IsInstanceOf<IValueNoise2d>(valueNoise2D);
         }
 
         [TestCase(0F, ExpectedResult = 0.55625391f)]
